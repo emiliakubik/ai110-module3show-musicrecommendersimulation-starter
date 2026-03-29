@@ -77,9 +77,9 @@ def score_song(user_prefs: Dict, song: Dict) -> Tuple[float, List[str]]:
     score = 0.0
     reasons = []
     
-    # Genre match (+3 points)
+    # Genre match (+1.5 points) - EXPERIMENT: Halved from 3.0
     if 'genre' in user_prefs and song['genre'] == user_prefs['genre']:
-        score += 3.0
+        score += 1.5
         reasons.append(f"Genre match: {song['genre']}")
     
     # Mood match (+2 points)
@@ -87,13 +87,13 @@ def score_song(user_prefs: Dict, song: Dict) -> Tuple[float, List[str]]:
         score += 2.0
         reasons.append(f"Mood match: {song['mood']}")
     
-    # Energy similarity (up to +2 points)
+    # Energy similarity (up to +4 points) - EXPERIMENT: Doubled from 2.0
     if 'energy' in user_prefs:
         energy_diff = abs(song['energy'] - user_prefs['energy'])
-        energy_score = (1.0 - energy_diff) * 2.0
+        energy_score = (1.0 - energy_diff) * 4.0
         energy_score = max(0.0, energy_score)  # Ensure non-negative
         score += energy_score
-        reasons.append(f"Energy similarity: {energy_score:.2f}/2.00 (song: {song['energy']:.2f}, target: {user_prefs['energy']:.2f})")
+        reasons.append(f"Energy similarity: {energy_score:.2f}/4.00 (song: {song['energy']:.2f}, target: {user_prefs['energy']:.2f})")
     
     # Acoustic preference (+1 point)
     if 'likes_acoustic' in user_prefs:

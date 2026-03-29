@@ -10,19 +10,16 @@ You will implement the functions in recommender.py:
 """
 
 from .recommender import load_songs, recommend_songs
+from .sample_profiles import STUDY_BUDDY, GYM_ENTHUSIAST, COFFEE_SHOP_LOVER
 
 
-def main() -> None:
-    songs = load_songs("data/songs.csv") 
-
-    # Starter example profile
-    user_prefs = {"genre": "pop", "mood": "happy", "energy": 0.8}
-
-    recommendations = recommend_songs(user_prefs, songs, k=5)
+def display_recommendations(profile_name: str, user_prefs: dict, songs: list, k: int = 5) -> None:
+    """Display recommendations for a given user profile in a formatted layout."""
+    recommendations = recommend_songs(user_prefs, songs, k=k)
 
     # Display user preferences
     print("\n" + "="*70)
-    print("🎵  MUSIC RECOMMENDER SYSTEM")
+    print(f"🎵  MUSIC RECOMMENDER - {profile_name.upper()}")
     print("="*70)
     print("\n📋 Your Taste Profile:")
     print(f"   Genre: {user_prefs.get('genre', 'Any')}")
@@ -55,6 +52,21 @@ def main() -> None:
         print()  # Blank line between songs
     
     print("="*70)
+
+
+def main() -> None:
+    songs = load_songs("data/songs.csv")
+    
+    # Test multiple user profiles
+    profiles = [
+        ("Study Buddy", STUDY_BUDDY),
+        ("Gym Enthusiast", GYM_ENTHUSIAST),
+        ("Coffee Shop Lover", COFFEE_SHOP_LOVER),
+    ]
+    
+    for profile_name, user_prefs in profiles:
+        display_recommendations(profile_name, user_prefs, songs, k=3)
+        print()  # Extra spacing between profiles
 
 
 if __name__ == "__main__":

@@ -6,7 +6,7 @@ to test your recommendation system. Each profile is provided as both a
 dictionary and a UserProfile object.
 """
 
-from recommender import UserProfile
+from .recommender import UserProfile
 
 # ============================================================================
 # Profile Dictionaries (useful for testing and creating profiles dynamically)

@@ -35,6 +35,37 @@ Potential biases: The system favors exact matches heavily, which could create a 
 
 ---
 
+## Output Screenshots
+
+Below are examples of the recommender system handling different user profiles, including edge cases:
+
+### Adversarial Testing Overview
+![Adversarial Testing Results](screenshots/Adversarial_Testing.png)
+
+Testing multiple edge case profiles to expose weaknesses in the scoring algorithm.
+
+### Empty Profile Test
+![Empty Profile showing valence-only scoring](screenshots/Empty_Profile.png)
+
+When no preferences are specified, the system defaults to valence-based recommendations, exposing a bias toward moderately happy songs.
+
+### Nonexistent Genre Test
+![Nonexistent genre request showing fallback behavior](screenshots/Nonexistent_Genre.png)
+
+Requesting a genre not in the dataset (death metal) shows how the system falls back to mood and energy matching.
+
+### Acoustic EDM Paradox
+![Contradictory preferences: EDM + acoustic style](screenshots/Acoustic_EDM_Paradox.png)
+
+When a user requests electronic dance music but prefers acoustic style, the system prioritizes genre match over acoustic preference.
+
+### Low Energy Intense Contradiction
+![Impossible combination: low energy + intense mood](screenshots/Low_Energy_Intense.png)
+
+Testing conflicting preferences reveals which features the algorithm prioritizes when no perfect match exists.
+
+---
+
 ## Getting Started
 
 ### Setup
