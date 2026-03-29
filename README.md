@@ -29,6 +29,10 @@ Some prompts to answer:
 
 You can include a simple diagram or bullet list if helpful.
 
+My recommender finds songs that match your music taste preferences. Each song has features like genre, mood, and energy level. Your user profile stores your favorite genre, mood, and energy level. The scores works as such: +3 points if genre matches, +2 points if mood matches, and up to +2 points based on how close the energy level is to yours. It ranks all songs by their total score and recommends the top 5 highest-scoring matches.
+
+Potential biases: The system favors exact matches heavily, which could create a "filter bubble" that never exposes users to new styles. It also assumes users want similar energy levels consistently, ignoring context changes. 
+
 ---
 
 ## Getting Started
