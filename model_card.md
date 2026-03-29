@@ -5,6 +5,8 @@
 Give your model a short, descriptive name.  
 Example: **VibeFinder 1.0**  
 
+TuneAlign
+
 ---
 
 ## 2. Intended Use  
@@ -16,6 +18,10 @@ Prompts:
 - What kind of recommendations does it generate  
 - What assumptions does it make about the user  
 - Is this for real users or classroom exploration  
+
+This system generates top 5 song recommendations from an 18-song catalog based on a user's preferred genre, mood, energy level, and acoustic style. It assumes users have stable, consistent preferences, that someone who likes high-energy music always wants high energy, regardless of context like time of day or activity. The system also assumes users prefer moderately happy songs unless specified otherwise (valence default = 0.65). This is for classroom exploration only, designed to understand how content-based filtering works and where biases emerge. It is not intended for real users or production deployment.
+
+
 
 ---
 
@@ -70,6 +76,8 @@ Prompts:
 - Cases where the system overfits to one preference  
 - Ways the scoring might unintentionally favor some users  
 
+Bias: Every user who does not specify valence is assumed to want moderatly happy songs (0.65). This discriminates against users who prefer sad, melancholic, or aggresive music. All recommendations gain hidden bonus points for being "happy".
+
 ---
 
 ## 7. Evaluation  
@@ -85,6 +93,7 @@ Prompts:
 
 No need for numeric metrics unless you created some.
 
+I tested 7 standard profiles (Study Buddy, Gym Enthusiast, Coffee Shop Lover, etc.) and 10 adversarial profiles designed to expose weaknesses (Empty Profile, Nonexistent Genre, Acoustic EDM Paradox, etc.). I looked for whether recommendations matched musical intuition: does a gym enthusiast get high-energy songs, does a study buddy get calm focus music? The biggest surprise was discovering a hidden happiness bias: every user gets recommendations boosted toward valence 0.65 by default, penalizing those who prefer sad or aggressive music. I also found a critical dataset gap—no songs exist between 0.48-0.74 energy, so users wanting "moderate energy" always get poor matches. A weight adjustment experiment (doubling energy importance, halving genre) revealed that when a classical lover requested high energy, they got EDM instead of classical—showing the system can't handle conflicting preferences gracefully.
 ---
 
 ## 8. Future Work  
